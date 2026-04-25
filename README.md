@@ -46,8 +46,6 @@ This repository is a pre-populated example that lets you explore the pattern bef
 
 ## Quick Start with GitHub Copilot
 
-> **Using a different tool?** See [Other AI Tools](#other-ai-tools) below.
-
 ### Step 1 — Open the project in VS Code
 
 Clone this repository and open the folder in VS Code.  
@@ -121,43 +119,6 @@ Run a lint check on the wiki and save the report to outputs/.
 
 ---
 
-## Other AI Tools
-
-<details>
-<summary>Claude Code</summary>
-
-```
-Read CLAUDE.md, then ingest everything new in raw/articles/ into the wiki.
-```
-
-```
-Read CLAUDE.md. Query the wiki: what do we know about [topic]?
-```
-</details>
-
-<details>
-<summary>Cursor / Windsurf / Aider</summary>
-
-```
-Read AGENTS.md. Ingest the new files in raw/articles/ and update the wiki.
-```
-
-```
-Read AGENTS.md. Query the wiki: what do we know about [topic]?
-```
-</details>
-
-<details>
-<summary>Codex CLI</summary>
-
-```bash
-codex "Read AGENTS.md and ingest new files in raw/"
-codex "Read AGENTS.md and query: what do we know about [topic]?"
-```
-</details>
-
----
-
 ## Core Workflows
 
 ### `ingest` — Process new sources
@@ -188,9 +149,7 @@ codex "Read AGENTS.md and query: what do we know about [topic]?"
 ```
 llm-wiki-helloworld/
 ├── README.md                              ← You are here
-├── .github/copilot-instructions.md        ← Schema + rules (GitHub Copilot reads this automatically)
-├── CLAUDE.md                              ← Schema + rules for Claude Code
-├── AGENTS.md                              ← Schema + rules for Cursor, Codex, Windsurf, Aider
+├── .github/copilot-instructions.md        ← Schema + rules (Copilot reads this automatically)
 ├── config.yaml                            ← Topics, feeds, schedule
 │
 ├── raw/                        ← YOUR SOURCES (never modified by the LLM)
