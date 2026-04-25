@@ -39,24 +39,31 @@ This repository is a pre-populated example that lets you explore the pattern bef
   - A source summary (`wiki/sources/`)
   - A master index (`wiki/INDEX.md`)
   - An activity log (`wiki/LOG.md`)
-- **`CLAUDE.md`** / **`AGENTS.md`** — the schema and operating rules that tell your AI how to build and maintain the wiki
+- **`.github/copilot-instructions.md`** — the schema and rules that GitHub Copilot reads automatically in VS Code
 - **`config.yaml`** — configuration for topics, feeds, and schedules
 
 ---
 
-## Quick Start
+## Quick Start with GitHub Copilot
 
-### Step 1 — Browse the example
+> **Using a different tool?** See [Other AI Tools](#other-ai-tools) below.
 
-Read through the files in order to see the full picture:
+### Step 1 — Open the project in VS Code
 
-1. [`raw/articles/llm-wiki-introduction.md`](raw/articles/llm-wiki-introduction.md) — the raw source
-2. [`wiki/sources/llm-wiki-introduction.md`](wiki/sources/llm-wiki-introduction.md) — what the LLM extracted
+Clone this repository and open the folder in VS Code.  
+GitHub Copilot will automatically read `.github/copilot-instructions.md` so it already understands the wiki schema — no extra setup needed.
+
+### Step 2 — Browse the example
+
+Read through these files to understand what the wiki looks like:
+
+1. [`raw/articles/llm-wiki-introduction.md`](raw/articles/llm-wiki-introduction.md) — a raw source article
+2. [`wiki/sources/llm-wiki-introduction.md`](wiki/sources/llm-wiki-introduction.md) — the source summary Copilot extracted
 3. [`wiki/concepts/llm-wiki-pattern.md`](wiki/concepts/llm-wiki-pattern.md) — a concept page
 4. [`wiki/entities/andrej-karpathy.md`](wiki/entities/andrej-karpathy.md) — an entity page
-5. [`wiki/INDEX.md`](wiki/INDEX.md) — the master catalog
+5. [`wiki/INDEX.md`](wiki/INDEX.md) — the master catalog of all pages
 
-### Step 2 — Add your own source
+### Step 3 — Add your own source
 
 Create a new markdown file in `raw/articles/` with this frontmatter:
 
@@ -72,33 +79,82 @@ topic: "your topic"
 Article content here...
 ```
 
-### Step 3 — Ask your AI to ingest it
+### Step 4 — Ask Copilot to ingest it
 
-**Claude Code:**
+Open **Copilot Chat** in VS Code (`Ctrl+Shift+I` / `Cmd+Shift+I`) and type:
+
+```
+Ingest the new files in raw/articles/ and update the wiki.
+```
+
+Copilot will:
+- Create a source summary in `wiki/sources/`
+- Create or update entity and concept pages in `wiki/entities/` and `wiki/concepts/`
+- Update `wiki/INDEX.md` and `wiki/LOG.md`
+
+### Step 5 — Query your wiki
+
+In Copilot Chat:
+
+```
+Query the wiki: what do we know about [topic]?
+```
+
+Or for a health check:
+
+```
+Run a lint check on the wiki and save the report to outputs/.
+```
+
+---
+
+## Copilot Chat Reference
+
+| What you want | What to type in Copilot Chat |
+|---|---|
+| Ingest new sources | `Ingest the new files in raw/articles/ and update the wiki.` |
+| Ask a question | `Query the wiki: what do we know about [topic]?` |
+| Health check | `Run a lint check on the wiki and save the report to outputs/.` |
+| Deep-dive analysis | `Synthesise everything the wiki knows about [topic] and save to wiki/syntheses/.` |
+
+> **Tip:** Copilot reads `.github/copilot-instructions.md` automatically, so you never need to say "read the instructions first" — it already knows the schema.
+
+---
+
+## Other AI Tools
+
+<details>
+<summary>Claude Code</summary>
+
 ```
 Read CLAUDE.md, then ingest everything new in raw/articles/ into the wiki.
 ```
 
-**GitHub Copilot (VS Code):**
 ```
-Read CLAUDE.md and ingest the new files in raw/articles/ into the wiki.
+Read CLAUDE.md. Query the wiki: what do we know about [topic]?
 ```
+</details>
 
-**Cursor / Windsurf:**
+<details>
+<summary>Cursor / Windsurf / Aider</summary>
+
 ```
 Read AGENTS.md. Ingest the new files in raw/articles/ and update the wiki.
 ```
 
-**Codex CLI:**
+```
+Read AGENTS.md. Query the wiki: what do we know about [topic]?
+```
+</details>
+
+<details>
+<summary>Codex CLI</summary>
+
 ```bash
 codex "Read AGENTS.md and ingest new files in raw/"
+codex "Read AGENTS.md and query: what do we know about [topic]?"
 ```
-
-### Step 4 — Query your wiki
-
-```
-Read CLAUDE.md (or AGENTS.md). Query the wiki: what do we know about [topic]?
-```
+</details>
 
 ---
 
@@ -131,10 +187,11 @@ Read CLAUDE.md (or AGENTS.md). Query the wiki: what do we know about [topic]?
 
 ```
 llm-wiki-helloworld/
-├── README.md                   ← You are here
-├── CLAUDE.md                   ← Schema + rules for Claude Code
-├── AGENTS.md                   ← Schema + rules for Cursor, Codex, Windsurf, Aider
-├── config.yaml                 ← Topics, feeds, schedule
+├── README.md                              ← You are here
+├── .github/copilot-instructions.md        ← Schema + rules (GitHub Copilot reads this automatically)
+├── CLAUDE.md                              ← Schema + rules for Claude Code
+├── AGENTS.md                              ← Schema + rules for Cursor, Codex, Windsurf, Aider
+├── config.yaml                            ← Topics, feeds, schedule
 │
 ├── raw/                        ← YOUR SOURCES (never modified by the LLM)
 │   ├── articles/               ← Web articles, blog posts, papers
