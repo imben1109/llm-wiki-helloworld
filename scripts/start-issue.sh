@@ -65,14 +65,17 @@ info "Fetching issue #${ISSUE_NUMBER} from ${REPO} …"
 ISSUE_JSON=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" \
   --json number,title,url,state,body,labels,assignees,createdAt)
 
-ISSUE_TITLE=$(echo "$ISSUE_JSON" | gh api --jq '.title' /dev/stdin 2>/dev/null \
-  || echo "$ISSUE_JSON" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['title'])")
-ISSUE_URL=$(echo "$ISSUE_JSON"   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['url'])")
-ISSUE_STATE=$(echo "$ISSUE_JSON" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['state'])")
-ISSUE_BODY=$(echo "$ISSUE_JSON"  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['body'] or '')")
-ISSUE_DATE=$(echo "$ISSUE_JSON"  | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['createdAt'][:10])")
-ISSUE_LABELS=$(echo "$ISSUE_JSON"| python3 -c "import sys,json; d=json.load(sys.stdin); print(', '.join(l['name'] for l in d['labels']) or '—')")
-ISSUE_ASSIGNEES=$(echo "$ISSUE_JSON"| python3 -c "import sys,json; d=json.load(sys.stdin); print(', '.join(a['login'] for a in d['assignees']) or '—')")
+# Helper: extract a value from $ISSUE_JSON using a Python expression.
+# Usage: jget <python-expression>   (the parsed dict is available as `d`)
+jget() { echo "$ISSUE_JSON" | python3 -c "import sys,json; d=json.load(sys.stdin); print($1)"; }
+
+ISSUE_TITLE=$(jget "d['title']")
+ISSUE_URL=$(jget "d['url']")
+ISSUE_STATE=$(jget "d['state']")
+ISSUE_BODY=$(jget "d['body'] or ''")
+ISSUE_DATE=$(jget "d['createdAt'][:10]")
+ISSUE_LABELS=$(jget "', '.join(l['name'] for l in d['labels']) or '—'")
+ISSUE_ASSIGNEES=$(jget "', '.join(a['login'] for a in d['assignees']) or '—'")
 
 # ── export issue to outputs/issue-<number>.md ────────────────────────────────
 
@@ -134,7 +137,7 @@ git add "$ISSUE_FILE"
 if git diff --cached --quiet; then
   info "Nothing new to commit (issue file already up to date)."
 else
-  COMMIT_MSG="issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
+  COMMIT_MSG="Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
   git commit -m "$COMMIT_MSG"
   info "Committed: ${COMMIT_MSG}"
 fi
@@ -149,7 +152,7 @@ gh pr create \
   --repo "$REPO" \
   --base main \
   --head "$BRANCH" \
-  --title "issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" \
+  --title "Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}" \
   --body "Closes ${ISSUE_URL}"
 
 info "Done! Pull request created for issue #${ISSUE_NUMBER}."
