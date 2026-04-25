@@ -44,6 +44,26 @@ Query the wiki: what do we know about [topic]?
 
 ---
 
+## Development Workflow
+
+Use `scripts/start-issue.sh` to start work on any GitHub issue in one command.
+
+```bash
+bash scripts/start-issue.sh <issue-number>
+```
+
+The script:
+
+1. **Verifies** the current branch is `main` and up to date with `origin`.
+2. **Fetches** the issue from GitHub and exports it to `outputs/issue-<number>.md` — a Markdown file with the issue description, a planning checklist, and a progress section for manual tracking.
+3. **Creates** a branch named `issue-<number>`.
+4. **Commits** the exported file with a message that includes the issue number and title.
+5. **Opens a pull request** whose description links back to the issue URL.
+
+> Requires the [GitHub CLI (`gh`)](https://cli.github.com/) and an authenticated session (`gh auth login`).
+
+---
+
 ## Credits
 
 - Pattern by [Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — License: MIT
