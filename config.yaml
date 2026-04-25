@@ -35,10 +35,10 @@ feeds:
   reddit:
     enabled: false
 
-# Schedule for automated runs (used by /loop in Claude Code, or cron for other tools).
+# Schedule for automated runs.
 schedule:
   run:
-    loop_interval: "2h"   # For /loop in Claude Code
+    loop_interval: "2h"
 
 # Ingest settings
 ingest:
