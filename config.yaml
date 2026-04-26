@@ -1,0 +1,52 @@
+wiki:
+  name: "LLM Wiki Hello World"
+  language: "en"
+
+# Topics the LLM should build knowledge about.
+# The 'discover' workflow uses these to find new sources.
+topics:
+  - name: "LLM Wiki Pattern"
+    keywords:
+      - "llm wiki"
+      - "karpathy knowledge base"
+      - "personal wiki llm"
+      - "second brain ai"
+    priority: high
+
+  - name: "Large Language Models"
+    keywords:
+      - "large language models"
+      - "LLM"
+      - "claude"
+      - "gpt"
+      - "gemini"
+    priority: medium
+
+# Automated source discovery (used by the 'discover' workflow).
+feeds:
+  hackernews:
+    enabled: true
+    min_score: 50
+    keywords: ["llm wiki", "karpathy", "knowledge base"]
+
+  github_trending:
+    enabled: false
+
+  reddit:
+    enabled: false
+
+# Schedule for automated runs.
+schedule:
+  run:
+    loop_interval: "2h"
+
+# Ingest settings
+ingest:
+  max_pages_per_source: 15   # Max wiki pages one source can create/update
+  flag_contradictions: true  # Flag when new info contradicts existing wiki content
+
+# Lint settings
+lint:
+  report_orphan_pages: true
+  report_broken_links: true
+  report_knowledge_gaps: true
