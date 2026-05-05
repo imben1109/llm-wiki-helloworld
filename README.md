@@ -96,6 +96,63 @@ Copilot will check for broken links, orphan pages, and knowledge gaps, then writ
 
 ---
 
+## Alternatives
+
+The LLM Wiki pattern is one of several approaches to building a personal knowledge base. Key alternatives include:
+
+### Traditional (manual) tools
+| Tool | Description |
+|------|-------------|
+| **Plain notes / Markdown folders** | Simple files in folders; low friction but no automatic organisation |
+| **Zettelkasten** | Atomic, interlinked notes with unique IDs; powerful but requires strict discipline |
+| **Obsidian / Roam / Notion** | Graph-based PKB tools with rich linking; still requires manual writing and tagging |
+| **Wiki software (MediaWiki etc.)** | Cross-referenced pages; collaborative but entirely manual |
+
+### AI-assisted alternatives
+| Approach | Description |
+|----------|-------------|
+| **RAG (Retrieval-Augmented Generation)** | Indexes documents into a vector database; retrieves relevant chunks at query time. See [Why Not Just Use RAG?](#why-not-just-use-rag) below. |
+| **Full chat with documents** | Upload files directly to an LLM chat session; simple but no persistent, structured knowledge base |
+| **AI note assistants** (Notion AI, Mem, etc.) | Integrated AI inside existing PKB tools; still relies on manual note creation |
+
+### Why Not Just Use RAG?
+
+| Aspect | Traditional RAG | LLM Wiki |
+|--------|----------------|----------|
+| When knowledge is processed | At query time | At ingest time (once) |
+| Cross-references | None — inferred per query | Explicit and maintained |
+| Contradiction detection | Not detected | Flagged on ingest |
+| Growth over time | Flat corpus | Compounding wiki |
+| Infrastructure required | Vector DB + embeddings | Folders + markdown only |
+
+---
+
+## Advantages
+
+- **No infrastructure** — the entire system is plain markdown files and folders; no vector database, no embeddings, no servers required.
+- **Compiled knowledge** — information is processed and structured once at ingest time, making queries fast and consistent.
+- **Explicit cross-references** — connections between topics are built and maintained automatically, creating a graph of knowledge.
+- **Contradiction detection** — when a new source conflicts with existing wiki content, the conflict is flagged immediately.
+- **Compounding value** — each new source adds context that enriches existing pages, so the wiki becomes more useful over time.
+- **Works with any AI assistant** — compatible with GitHub Copilot, Claude, Cursor, Codex CLI, Gemini CLI, Aider, and others.
+- **Git-friendly** — all content is plain text, so version history, branching, and collaboration work out of the box.
+- **Human-readable** — the wiki is written for humans; you can read and browse it directly without querying an AI.
+- **Obsidian-compatible** — the `[[wiki-link]]` format works with Obsidian for graph visualisation.
+
+---
+
+## Disadvantages / Limitations
+
+- **Manual ingest trigger** — you must ask the LLM to ingest new sources; there is no fully automatic pipeline unless you add one.
+- **Re-ingest required for updates** — if a raw source changes, the wiki pages derived from it are not updated automatically.
+- **LLM quality dependency** — the structure and accuracy of the wiki depends on how well the LLM follows the schema instructions; a weaker model may produce inconsistent results.
+- **Context window limits** — very large source files or a very large wiki may exceed the LLM's context window, requiring chunking strategies.
+- **Schema maintenance** — the `copilot-instructions.md` schema must be kept clear and up to date; a poorly written schema leads to a poorly organised wiki.
+- **Not real-time** — unlike RAG, which can answer from any document immediately, the LLM Wiki requires an explicit ingest step before new sources are queryable.
+- **Single-user by default** — while git enables collaboration, the pattern is primarily designed for personal use; multi-user workflows require additional conventions.
+
+---
+
 ## Credits
 
 - Pattern by [Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — License: MIT
