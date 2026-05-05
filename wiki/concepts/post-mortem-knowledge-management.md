@@ -3,7 +3,8 @@ type: concept
 domain: engineering
 created: 2026-05-04
 updated: 2026-05-04
-sources: [raw/messages/team-llm-wiki-adoption-discussion.md]
+sources: [raw/articles/llm-wiki-introduction.md, raw/messages/teams-crm-support-incident.md]
+updated: 2026-05-05
 ---
 
 # Post-Mortem Knowledge Management
@@ -24,15 +25,19 @@ The [[llm-wiki-pattern]] directly addresses this by treating post-mortems as raw
 
 - A team migrates their last five post-mortems into `raw/notes/` as a pilot; the LLM extracts recurring root causes and cross-references them across incidents.
 - An engineer asks "what are the common failure patterns across all our incidents?" — the LLM synthesises an answer from the wiki only, citing specific post-mortems.
-- The wiki flags a contradiction: two post-mortems recommend opposite mitigation strategies for the same class of failure.
+- The CRM support team updates their [[application-support-runbook]] on Confluence immediately after each incident to capture root cause and resolution steps for future reuse.
+- The wiki flags a contradiction: two incident reports recommend opposite mitigation strategies for the same failure class.
 
 ## Links
 
 - [[llm-wiki-pattern]]
 - [[personal-knowledge-base]]
 - [[contradiction-detection]]
-- [[bob-martinez]]
+- [[incident-management]]
+- [[application-support-runbook]]
+- [[james-patel]]
 
 ## Sources
 
-- [Team Discussion: LLM Wiki Adoption](../sources/team-llm-wiki-adoption-discussion.md)
+- [LLM Wiki Introduction](../sources/llm-wiki-introduction.md)
+- [Microsoft Teams: CRM Support Incident](../sources/teams-crm-support-incident.md)

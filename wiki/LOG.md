@@ -4,7 +4,37 @@ A chronological record of every operation performed on this wiki.
 
 ---
 
-## [2026-05-04 10:15] ingest | Team message: LLM Wiki adoption discussion
+## [2026-05-05 00:12] ingest | Microsoft Teams app support incident + Confluence runbook
+
+- **Sources ingested**:
+  - `raw/messages/teams-crm-support-incident.md` (Microsoft Teams, platform: MS Teams)
+  - `raw/articles/confluence-crm-troubleshooting-runbook.md` (Confluence page)
+- **Pages created**:
+  - `wiki/sources/teams-crm-support-incident.md` (source summary)
+  - `wiki/sources/confluence-crm-troubleshooting-runbook.md` (source summary)
+  - `wiki/entities/sarah-wong.md` (entity — person)
+  - `wiki/entities/james-patel.md` (entity — person)
+  - `wiki/entities/kevin-obrien.md` (entity — person)
+  - `wiki/entities/lisa-tan.md` (entity — person)
+  - `wiki/concepts/incident-management.md` (concept)
+  - `wiki/concepts/application-support-runbook.md` (concept)
+  - `wiki/concepts/service-account-management.md` (concept)
+- **Pages updated**:
+  - `wiki/concepts/contradiction-detection.md` (source reference updated)
+  - `wiki/concepts/post-mortem-knowledge-management.md` (examples and links updated)
+- **Pages removed**:
+  - `raw/messages/team-llm-wiki-adoption-discussion.md` (replaced by MS Teams app support example)
+  - `wiki/sources/team-llm-wiki-adoption-discussion.md`
+  - `wiki/entities/alice-chen.md`, `bob-martinez.md`, `carol-liu.md`, `david-park.md`
+  - `wiki/concepts/architecture-decision-records.md`
+- **INDEX.md**: Updated — 16 total pages (was 13)
+- **Cross-references added**: 31
+- **Contradictions flagged**: 0
+- **Total pages in wiki**: 16
+
+---
+
+## [2026-05-04 10:15] ingest | Team message: LLM Wiki adoption discussion (superseded)
 
 - **Source ingested**: `raw/messages/team-llm-wiki-adoption-discussion.md`
 - **Pages created**:

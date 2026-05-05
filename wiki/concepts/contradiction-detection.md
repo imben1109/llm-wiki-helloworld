@@ -3,7 +3,8 @@ type: concept
 domain: ai | knowledge-management
 created: 2026-05-04
 updated: 2026-05-04
-sources: [raw/messages/team-llm-wiki-adoption-discussion.md]
+sources: [raw/articles/llm-wiki-introduction.md]
+updated: 2026-05-05
 ---
 
 # Contradiction Detection
@@ -26,17 +27,16 @@ The `flag_contradictions: true` setting in `config.yaml` controls whether this b
 
 ## Examples
 
-- Two [[architecture-decision-records]] recommend different logging libraries; the contradiction is flagged on the "Logging" concept page.
+- Two runbooks recommend different diagnostic steps for the same error class; the contradiction is flagged on the relevant concept page.
 - Two post-mortems recommend opposite mitigation strategies for the same failure class; both recommendations are shown on the relevant concept page with a ⚠️ flag.
 - A new article contradicts a claim made in an older article; the wiki shows both claims with their respective source citations.
 
 ## Links
 
 - [[llm-wiki-pattern]]
-- [[architecture-decision-records]]
 - [[post-mortem-knowledge-management]]
-- [[carol-liu]]
+- [[application-support-runbook]]
 
 ## Sources
 
-- [Team Discussion: LLM Wiki Adoption](../sources/team-llm-wiki-adoption-discussion.md)
+- [LLM Wiki Introduction](../sources/llm-wiki-introduction.md)
