@@ -2,8 +2,8 @@
 type: entity
 category: person
 created: 2026-04-25
-updated: 2026-04-25
-sources: [llm-wiki-introduction]
+updated: 2026-05-06
+sources: [llm-wiki-introduction, large-language-models-overview]
 ---
 
 # Andrej Karpathy
@@ -20,7 +20,7 @@ He proposed the [[llm-wiki-pattern]] — a methodology for maintaining a [[perso
 
 - Co-founder of OpenAI (2015)
 - Director of AI at Tesla (2017–2022), where he led the Autopilot computer vision team
-- Creator of the micrograd and nanoGPT educational projects
+- Creator of the micrograd and nanoGPT educational projects (minimal [[transformer-architecture]] implementation)
 - Creator of the LLM Wiki pattern, described in a public GitHub Gist
 - Advocate for clear, from-scratch implementations of neural networks as a learning tool
 - Known for the "Software 2.0" essay arguing that neural networks are replacing traditionally written software
@@ -29,6 +29,8 @@ He proposed the [[llm-wiki-pattern]] — a methodology for maintaining a [[perso
 
 - [[llm-wiki-pattern]] — Pattern created by Karpathy for LLM-maintained knowledge bases
 - [[personal-knowledge-base]] — The use case his pattern addresses
+- [[transformer-architecture]] — Architecture underlying LLMs; Karpathy's nanoGPT is a reference implementation
+- [[openai]] — Organisation co-founded by Karpathy in 2015
 
 ## Sources
 

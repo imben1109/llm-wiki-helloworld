@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <metadata>
+    <title>Large Language Models: Architecture, Key Models, and Scaling</title>
+    <topic>Large Language Models</topic>
+    <discovered>2026-05-06</discovered>
+  </metadata>
+
+  <overview>
+    Large language models (LLMs) are deep neural networks trained on massive text corpora to predict and generate natural language. They are built on the transformer architecture, introduced by Vaswani et al. in the 2017 paper "Attention Is All You Need". Since that breakthrough, LLMs have scaled from millions to hundreds of billions of parameters, producing systems capable of reasoning, coding, summarisation, translation, and open-ended conversation.
+  </overview>
+
+  <section name="Transformer Architecture">
+    <p>
+      The transformer is the foundational neural network architecture underlying virtually all modern LLMs. It replaced recurrent neural networks (RNNs) and long short-term memory networks (LSTMs) as the dominant sequence modelling architecture because it processes tokens in parallel rather than sequentially, making it dramatically faster to train on modern GPU/TPU hardware.
+    </p>
+    <p>
+      A transformer consists of a stack of identical layers, each containing two sub-layers: a multi-head self-attention mechanism and a position-wise feed-forward network. Residual connections and layer normalisation are applied around each sub-layer.
+    </p>
+    <p>
+      Modern LLMs use a decoder-only variant of the transformer (as opposed to the encoder-decoder design in the original paper). In this variant the model attends only to previous tokens (causal or autoregressive attention), making it well-suited to next-token prediction.
+    </p>
+  </section>
+
+  <section name="Attention Mechanism">
+    <p>
+      The attention mechanism is the core innovation of the transformer. It allows each token in a sequence to directly attend to every other token, computing a weighted sum of value vectors where the weights are determined by the compatibility (dot-product similarity) between query and key vectors.
+    </p>
+    <p>
+      Multi-head attention runs several attention operations in parallel, each with its own learned query, key, and value projections. The outputs are concatenated and projected, allowing the model to jointly attend to information from different representation subspaces.
+    </p>
+    <p>
+      Scaled dot-product attention is computed as: Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) * V, where d_k is the key dimension used for scaling to prevent vanishing gradients.
+    </p>
+    <p>
+      The quadratic cost of attention with respect to sequence length (O(n^2)) has motivated research into efficient variants such as Flash Attention, Sparse Attention, and linear attention approximations.
+    </p>
+  </section>
+
+  <section name="Key LLM Families">
+    <subsection name="GPT (OpenAI)">
+      <p>
+        The GPT (Generative Pre-trained Transformer) series is developed by OpenAI. GPT-1 (2018) demonstrated that unsupervised pre-training followed by task-specific fine-tuning could outperform task-specific models. GPT-2 (2019) scaled this to 1.5 billion parameters and showed impressive zero-shot text generation. GPT-3 (2020) scaled to 175 billion parameters and introduced the concept of few-shot prompting. GPT-4 (2023) is a multimodal model capable of processing both text and images, with significantly improved reasoning and instruction-following capabilities.
+      </p>
+      <p>
+        OpenAI also introduced the InstructGPT line, which applies reinforcement learning from human feedback (RLHF) to align GPT models with human intent, reducing harmful outputs and improving helpfulness. ChatGPT is a consumer-facing product built on this approach.
+      </p>
+    </subsection>
+    <subsection name="Claude (Anthropic)">
+      <p>
+        Claude is the LLM family developed by Anthropic, an AI safety company founded in 2021 by former OpenAI researchers including Dario Amodei and Daniela Amodei. Anthropic's research focuses on AI safety and developing the Constitutional AI (CAI) technique, which trains models to follow a set of principles rather than relying solely on human feedback labels.
+      </p>
+      <p>
+        Claude models are known for their long context windows (up to 200 000 tokens in Claude 3), strong instruction-following, and careful handling of sensitive topics. Claude 3 (2024) was released in three variants: Haiku (fast and compact), Sonnet (balanced), and Opus (most capable).
+      </p>
+    </subsection>
+    <subsection name="Gemini (Google DeepMind)">
+      <p>
+        Gemini is Google DeepMind's family of natively multimodal LLMs, released in 2023. It is trained from the ground up to understand and generate text, images, audio, and video. Gemini Ultra is the most capable variant and was the first model to match human expert performance on the MMLU benchmark across 57 subjects.
+      </p>
+    </subsection>
+    <subsection name="LLaMA (Meta AI)">
+      <p>
+        LLaMA (Large Language Model Meta AI) is Meta's family of open-weight LLMs. LLaMA 1 (2023) demonstrated that a smaller, carefully trained model could match or exceed much larger proprietary models on many benchmarks. LLaMA 2 (2023) and LLaMA 3 (2024) extended this with improved performance and permissive licences for research and commercial use. The open release of LLaMA weights catalysed a large ecosystem of fine-tuned variants and community research.
+      </p>
+    </subsection>
+  </section>
+
+  <section name="Scaling Laws">
+    <p>
+      Scaling laws describe predictable, power-law relationships between model performance and three key variables: model size (number of parameters), training data volume (number of tokens), and compute budget. The Chinchilla scaling laws (Hoffmann et al., 2022) showed that many large models were undertrained relative to their size, and that compute-optimal training requires roughly 20 tokens of training data per model parameter.
+    </p>
+    <p>
+      Scaling laws allow practitioners to predict model performance before training and to allocate a fixed compute budget optimally between model size and data volume. They have driven a shift toward training smaller models on more data rather than simply maximising parameter count.
+    </p>
+  </section>
+
+  <section name="Training Techniques">
+    <p>
+      Modern LLMs are trained in multiple stages. Pre-training on large text corpora teaches the model language statistics and world knowledge. Supervised fine-tuning (SFT) on high-quality instruction-response pairs adapts the model to follow instructions. Reinforcement learning from human feedback (RLHF) or direct preference optimisation (DPO) further aligns the model with human preferences.
+    </p>
+    <p>
+      Andrej Karpathy's nanoGPT project provides a minimal, readable implementation of GPT-style model training, widely used for education. His "Neural Networks: Zero to Hero" lecture series has become a standard reference for understanding transformer internals from first principles.
+    </p>
+  </section>
+
+  <section name="Key Challenges">
+    <p>
+      Hallucination: LLMs can generate plausible-sounding but factually incorrect text because they are trained to predict likely continuations, not to retrieve verified facts. Mitigations include retrieval-augmented generation (RAG), grounding with tool use, and improved training objectives.
+    </p>
+    <p>
+      Alignment: Ensuring that LLMs act in accordance with human values and intentions, avoiding harmful, biased, or deceptive outputs. Active research areas include RLHF, constitutional AI, and scalable oversight.
+    </p>
+    <p>
+      Context length: Transformers' quadratic attention cost limits the practical context window. Research into efficient attention variants and architectures like Mamba (state-space models) aims to extend this.
+    </p>
+  </section>
+</article>
