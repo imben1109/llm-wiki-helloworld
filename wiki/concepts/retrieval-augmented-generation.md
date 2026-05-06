@@ -41,6 +41,7 @@ The [[llm-wiki-pattern]] takes a different approach: knowledge is compiled and s
 
 - [[llm-wiki-pattern]] — An alternative approach that compiles knowledge at ingest time
 - [[personal-knowledge-base]] — The broader use case both approaches address
+- [[transformer-architecture]] — The underlying architecture of the LLMs used in both RAG and LLM Wiki systems
 
 ## Sources
 
